@@ -112,12 +112,20 @@ const removeManyPeople = (done) => {
 };
 /*==========*/
 
+//task12 Chain Search Query Helpers to Narrow Search Results
 const queryChain = (done) => {
   const foodToSearch = "burrito";
   
-
-  done(null /*, data*/);
+  Person.find({ favoriteFoods: foodToSearch })
+        .sort({ name: 'asc' })
+        .limit(2)
+        .select('-age')
+        .exec((err, personFound) => {
+          if(err) return console.error(err);
+          done(null, personFound);
+        });
 };
+/*==========*/
 
 /** **Well Done !!**
 /* You completed these challenges, let's go celebrate !
