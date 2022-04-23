@@ -1,4 +1,7 @@
 require('dotenv').config();
+// var express = require('express');
+// var app = express();
+// app.listen(3000);
 
 //MongoDB && Mongoose
 //task1 Install and Set Up Mongoose
@@ -27,20 +30,20 @@ const createAndSavePerson = (done) => {
 };
 /*==========*/
 
-let arrayOfPeople = [
-    aleksiDuluzauri,
-    {name: "Sol", age: 76, favoriteFoods: ["roast chicken"]},
-    {name: "Robert", age: 78, favoriteFoods: ["wine"]}
-  ];
+//task4 Create Many Records with model.create()
 const createManyPeople = (arrayOfPeople, done) => {
   Person.create(arrayOfPeople, (err, people) => {
-    if (err) return conople.error(err);
+    if (err) return console.error(err);
     done(null, people);
   });
 };
+/*==========*/
 
 const findPeopleByName = (personName, done) => {
-  done(null /*, data*/);
+  Person.find({ name: personName }, (err, nameFound)=> {
+    if (err) return console.error(err);
+    done(null, nameFound);
+  });
 };
 
 const findOneByFood = (food, done) => {
