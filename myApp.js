@@ -39,16 +39,23 @@ const createManyPeople = (arrayOfPeople, done) => {
 };
 /*==========*/
 
+// task5 Use model.find() to Search Your Database
 const findPeopleByName = (personName, done) => {
-  Person.find({ name: personName }, (err, nameFound)=> {
+  Person.find({ name: personName }, (err, personFound)=> {
     if (err) return console.error(err);
-    done(null, nameFound);
+    done(null, personFound);
   });
 };
+/*==========*/
 
+//task6 Use model.findOne() to Return a Single Matching Document from Your Database
 const findOneByFood = (food, done) => {
-  done(null /*, data*/);
+  Person.findOne({ favoriteFoods: food }, (err, personFound) => {
+    if (err) return console.error(err);
+    done(null, personFound);
+  })
 };
+/*==========*/
 
 const findPersonById = (personId, done) => {
   done(null /*, data*/);
