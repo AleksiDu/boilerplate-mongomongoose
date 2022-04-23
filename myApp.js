@@ -22,7 +22,7 @@ let Person = mongoose.model('Person', personSchema);
 
 //task3 Create and Save a Record of a Model
 const createAndSavePerson = (done) => {
-  let aleksiDuluzauri = new Person({ name: 'Aleksi Duluzauri', age: 30, favoriteFoods: ['Khinkali', 'Steak', 'Cake']});
+  let aleksiDuluzauri = new Person({ name: 'Aleksi Duluzauri', age: 30, favoriteFoods: ['Khinkali', 'Steak', 'Cake'] });
   aleksiDuluzauri.save((err, data) => {
     if (err) return console.error(err);
     done(null, data);
@@ -41,7 +41,7 @@ const createManyPeople = (arrayOfPeople, done) => {
 
 // task5 Use model.find() to Search Your Database
 const findPeopleByName = (personName, done) => {
-  Person.find({ name: personName }, (err, personFound)=> {
+  Person.find({ name: personName }, (err, personFound) => {
     if (err) return console.error(err);
     done(null, personFound);
   });
@@ -66,11 +66,21 @@ const findPersonById = (personId, done) => {
 };
 /*==========*/
 
+//task8 Perform Classic Updates by Running Find, Edit, then Save
 const findEditThenSave = (personId, done) => {
   const foodToAdd = "hamburger";
+  Person.findById({ _id: personId }, (err, personFound) => {
+    if (err) return console.error(err);
 
-  done(null /*, data*/);
+    personFound.favoriteFoods.push(foodToAdd);
+
+    personFound.save((err, updatedPerson) => {
+      if (err) return console.error(err);
+      done(null, updatedPerson);
+    });
+  });
 };
+/*==========*/
 
 const findAndUpdate = (personName, done) => {
   const ageToSet = 20;
