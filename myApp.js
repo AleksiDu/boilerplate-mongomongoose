@@ -101,14 +101,20 @@ const removeById = (personId, done) => {
 };
 /*==========*/
 
+//task11 Delete Many Documents with model.remove()
 const removeManyPeople = (done) => {
   const nameToRemove = "Mary";
 
-  done(null /*, data*/);
+  Person.remove({ name: nameToRemove }, (err, personFound) => {
+    if(err) return console.error(err);
+    done(null, personFound);
+  });
 };
+/*==========*/
 
 const queryChain = (done) => {
   const foodToSearch = "burrito";
+  
 
   done(null /*, data*/);
 };
